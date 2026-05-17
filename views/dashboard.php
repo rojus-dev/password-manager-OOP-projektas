@@ -26,6 +26,11 @@ $currentUser = $userClass->findByUsername($_SESSION['username']);
 $generatedPassword = '';
 $message = '';
 
+if (isset($_SESSION['message'])) {
+    $message = $_SESSION['message'];
+    unset($_SESSION['message']);
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['generate'])) {
         $generator = new PasswordGenerator();
@@ -48,7 +53,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($plainKey) {
             $encryptedPassword = $encryptor->encrypt($password, $plainKey);
             $passwordEntry->save($_SESSION['user_id'], $title, $encryptedPassword);
-            $message = 'Slaptazodis issaugotas';
+            $_SESSION['message'] = 'Slaptazodis issaugotas';
+            header('Location: dashboard.php');
+            exit;
         } else {
             $message = 'Neteisingas paskyros slaptazodis';
         }
