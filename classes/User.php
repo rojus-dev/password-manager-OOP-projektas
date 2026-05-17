@@ -30,4 +30,15 @@ class User
 
         return $query->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function login($username, $password)
+    {
+        $user = $this->findByUsername($username);
+
+        if ($user && password_verify($password, $user['password_hash'])) {
+        return $user;
+        }
+
+        return false;
+    }
 }
