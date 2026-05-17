@@ -9,15 +9,19 @@ class Encryptor
         $iv = openssl_random_pseudo_bytes(16);
         $key = hash('sha256', $password, true);
 
-        $encrypted = openssl_encrypt(
-            $data,
-            $this->method,
-            $key,
-            0,
-            $iv
-        );
+        $encrypted = openssl_encrypt($data, $this->method, $key, 0, $iv);
 
         return base64_encode($iv . $encrypted);
+    }
+
+    public function decrypt($data, $password)
+    {
+        $data = base64_decode($data);
+        $iv = substr($data, 0, 16);
+        $encrypted = substr($data, 16);
+        $key = hash('sha256', $password, true);
+
+        return openssl_decrypt($encrypted, $this->method, $key, 0, $iv);
     }
 
     public function generateKey()
