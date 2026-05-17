@@ -8,6 +8,11 @@ require_once '../classes/User.php';
 
 $message = '';
 
+if (isset($_SESSION['user_id'])) {
+    header('Location: dashboard.php');
+    exit;
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $database = new Database();
     $connection = $database->connect();
