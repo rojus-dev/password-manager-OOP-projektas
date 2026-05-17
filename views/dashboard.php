@@ -97,7 +97,9 @@ $savedPasswords = $passwordEntry->getByUser($_SESSION['user_id']);
     <button type="submit" name="generate">Generuoti</button>
 </form>
 
-<p><?php echo $generatedPassword; ?></p>
+<?php if (!empty($generatedPassword)): ?>
+    <p>Sugeneruotas slaptazodis: <?php echo $generatedPassword; ?></p>
+<?php endif; ?>
 
 <h3>Issaugoti slaptazodi</h3>
 
