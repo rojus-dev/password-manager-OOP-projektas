@@ -62,6 +62,7 @@ $savedPasswords = $passwordEntry->getByUser($_SESSION['user_id']);
 <html>
 <head>
     <title>Dashboard</title>
+    <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
 
