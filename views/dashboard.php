@@ -130,6 +130,7 @@ $savedPasswords = $passwordEntry->getByUser($_SESSION['user_id']);
 
 <br>
 
+<a href="dashboard.php">Pradzia</a>
 <a href="logout.php">Atsijungti</a>
 
 </body>

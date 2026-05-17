@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $message = 'Toks vartotojas jau egzistuoja';
     } else {
         $user->register($username, $password, $encryptedKey);
-        $message = 'Registracija sekminga';
+        $message = 'Registracija sekminga, galite prisijungti';
     }
 }
 ?>
