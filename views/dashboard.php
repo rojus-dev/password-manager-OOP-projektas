@@ -40,14 +40,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $numbers = (int)$_POST['numbers'];
         $specials = (int)$_POST['specials'];
 
-        $generatedPassword = $generator->generate($lower, $upper, $numbers, $specials);
+        $total = $lower + $upper + $numbers + $specials;
+
+        if ($lower < 0 || $upper < 0 || $numbers < 0 || $specials < 0) {
+            $message = 'Negalima ivesti neigiamu skaiciu';
+        } elseif ($total === 0) {
+            $message = 'Bent vienas simbolis turi buti pasirinktas';
+        } else {
+            $generatedPassword = $generator->generate($lower, $upper, $numbers, $specials);
+        }
     }
 
     if (isset($_POST['save'])) {
-        $title = $_POST['title'];
-        $password = $_POST['password'];
+        $title = trim($_POST['title']);
+        $password = trim($_POST['password']);
         $loginPassword = $_POST['login_password'];
 
+        if (empty($title) || empty($password)) {
+            $message = 'Uzpildyk visus laukus';
+        } else {
         $plainKey = $encryptor->decrypt($currentUser['encrypted_key'], $loginPassword);
 
         if ($plainKey) {
@@ -58,6 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         } else {
             $message = 'Neteisingas paskyros slaptazodis';
+        }
         }
     }
 }
