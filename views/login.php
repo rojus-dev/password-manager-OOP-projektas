@@ -14,8 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $user = new User($connection);
 
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    $username = trim($_POST['username']);
+    $password = trim($_POST['password']);
 
     $loggedUser = $user->login($username, $password);
 

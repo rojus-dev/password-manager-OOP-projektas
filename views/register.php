@@ -14,13 +14,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user = new User($connection);
     $encryptor = new Encryptor();
 
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    $username = trim($_POST['username']);
+    $password = trim($_POST['password']);
 
     $key = $encryptor->generateKey();
     $encryptedKey = $encryptor->encrypt($key, $password);
 
-    if ($user->findByUsername($username)) {
+    if (empty($username) || empty($password)) {
+        $message = 'Uzpildyk visus laukus';
+    } elseif ($user->findByUsername($username)) {
         $message = 'Toks vartotojas jau egzistuoja';
     } else {
         $user->register($username, $password, $encryptedKey);
