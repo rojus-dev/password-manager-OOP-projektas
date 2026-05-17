@@ -19,5 +19,7 @@ if (!isset($_SESSION['user_id'])) {
 
 <p>Prisijungimas sekmingas</p>
 
+<a href="logout.php">Atsijungti</a>
+
 </body>
 </html>
