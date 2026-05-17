@@ -116,7 +116,7 @@ $savedPasswords = $passwordEntry->getByUser($_SESSION['user_id']);
     <tr>
         <th>Pavadinimas</th>
         <th>Data</th>
-        <th>Uzkoduotas slaptazodis</th>
+        <th>AES uzkoduotas slaptazodis</th>
     </tr>
 
     <?php foreach ($savedPasswords as $item): ?>
@@ -130,7 +130,6 @@ $savedPasswords = $passwordEntry->getByUser($_SESSION['user_id']);
 
 <br>
 
-<a href="dashboard.php">Pradzia</a>
 <a href="logout.php">Atsijungti</a>
 
 </body>
